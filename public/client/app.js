@@ -6,6 +6,8 @@ window.Shortly = Backbone.View.extend({
       <ul> \
         <li><a href="#" class="index">All Links</a></li> \
         <li><a href="#" class="create">Shorten</a></li> \
+        <li> \
+        <input type="text" class="search" placeholder="Search URLs"></input></li> \
       </ul> \
       </div> \
       <div id="container"></div>'
@@ -13,11 +15,31 @@ window.Shortly = Backbone.View.extend({
 
   events: {
     "click li a.index":  "renderIndexView",
-    "click li a.create": "renderCreateView"
+    "click li a.create": "renderCreateView",
+    "keyup .search": function(e){
+      //if(e.keyCode == 13){ // check for "enter" key
+        this.filter();
+      //}
+    }
+  },
+
+  filter: function(){
+    var targetString = $('.search').val();
+    if(targetString){
+      $('.link').css('display','none');
+      $('.title:contains('+targetString+')').parent().parent().css('display','block');
+    }else{
+      $('.link').css('display','block');
+    }
   },
 
   initialize: function(){
     console.log( "Shortly is running" );
+    $(".search").keyup(function(event){
+      if(event.keyCode == 13){
+        $(".search").change();
+      }
+    });
     $('body').append(this.render().el);
     this.renderIndexView(); // default view
   },
