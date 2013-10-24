@@ -1,21 +1,20 @@
 Shortly.Links = Backbone.Collection.extend({
+  sort_key: 'visits',
+
   comparator: function(link){
-     return -link.get('visits');
+    // debugger;
+    if(this.sort_key === 'visits'){
+      return -link.get(this.sort_key);
+    }
+    return link.get(this.sort_key);
   },
+
+  sortByField: function(fieldName){
+    this.sort_key = fieldName;
+    this.sort();
+  },
+
   model: Shortly.Link,
-  url: '/links',
-  // comparator: function(link, attr) {
-  //   attr = attr || 'visits';
-  //   return -link.get(attr);
-  // }
-  changeSort: function(keyString){
-    this.comparator = function(link){
-      return -link.get(keyString);
-    };
-    // } else if (keyString === "title"){
-    //   this.comparator = function(link){
-    //     return -link.get('title');
-    //   };
-    // }
-  }
+
+  url: '/links'
 });

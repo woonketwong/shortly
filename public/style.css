@@ -139,10 +139,10 @@ form input[type=text] {
   padding: 5px;
 }
 
-.name, .visit{
+.createdAt, .visit{
   border:1px solid #ccc;
   border-radius: 5px;
 }
-.name:hover, .visit:hover{
+.createdAt:hover, .visit:hover{
   background-color: #ccc;
 }

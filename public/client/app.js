@@ -10,9 +10,6 @@ window.Shortly = Backbone.View.extend({
       </div> \
       <div> \
         <input type="text" class="search" placeholder="Search URLs"></input> \
-        <div class="sort visit">Visit</div> \
-        <div class="sort name">Name</div> \
-        <div class="sort">Sort by:</div> \
       </div> \
       <div id="container"></div>'
   ),
@@ -20,15 +17,14 @@ window.Shortly = Backbone.View.extend({
   events: {
     "click li a.index":  "renderIndexView",
     "click li a.create": "renderCreateView",
-    "click .name, .visit": "sort",
+    "click .name, .visit": function(){
+      // console.log("test");
+    },
     "keyup .search": function(e){
       //if(e.keyCode == 13){ // check for "enter" key
         this.filter();
       //}
     }
-  },
-
-  sort: function(e){
   },
 
   filter: function(){
@@ -48,7 +44,6 @@ window.Shortly = Backbone.View.extend({
         $(".search").change();
       }
     });
-    console.log(this);
     $('body').append(this.render().el);
     this.renderIndexView(); // default view
   },
@@ -61,7 +56,6 @@ window.Shortly = Backbone.View.extend({
   renderIndexView: function(e){
     e && e.preventDefault();
     var links = new Shortly.Links();
-    console.log(links.sort());
     var linksView = new Shortly.LinksView( {collection: links} );
     this.$el.find('#container').html( linksView.render().el );
     this.updateNav('index');
