@@ -17,9 +17,6 @@ window.Shortly = Backbone.View.extend({
   events: {
     "click li a.index":  "renderIndexView",
     "click li a.create": "renderCreateView",
-    "click .name, .visit": function(){
-      // console.log("test");
-    },
     "keyup .search": function(e){
       //if(e.keyCode == 13){ // check for "enter" key
         this.filter();
