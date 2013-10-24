@@ -36,13 +36,10 @@ window.Shortly = Backbone.View.extend({
 
   initialize: function(){
     console.log( "Shortly is running" );
-    $(".search").keyup(function(event){
-      if(event.keyCode == 13){
-        $(".search").change();
-      }
-    });
     $('body').append(this.render().el);
-    this.renderIndexView(); // default view
+    this.router = new Shortly.Router({el: this.$el.find('#container')});
+    this.router.on("route", this.updateNav, this);
+    Backbone.history.start({pushState: true});
   },
 
   render: function(){
@@ -52,17 +49,12 @@ window.Shortly = Backbone.View.extend({
 
   renderIndexView: function(e){
     e && e.preventDefault();
-    var links = new Shortly.Links();
-    var linksView = new Shortly.LinksView( {collection: links} );
-    this.$el.find('#container').html( linksView.render().el );
-    this.updateNav('index');
+    this.router.navigate("/", {trigger:true});
   },
 
   renderCreateView: function(e){
     e && e.preventDefault();
-    var linkCreateView = new Shortly.LinkCreateView();
-    this.$el.find('#container').html( linkCreateView.render().el );
-    this.updateNav('create');
+    this.router.navigate("/create", {trigger:true});
   },
 
   updateNav: function(className){
