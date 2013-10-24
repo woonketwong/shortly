@@ -12,6 +12,10 @@ Shortly.LinksView = Backbone.View.extend({
     return this;
   },
 
+  events: {
+    'click': function(){console.log("hello");}
+  },
+
   addAll: function(){
     this.collection.forEach(this.addOne, this);
   },
