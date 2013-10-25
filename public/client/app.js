@@ -1,18 +1,6 @@
 window.Shortly = Backbone.View.extend({
 
-  template: _.template(' \
-      <h1>Shortly</h1> \
-      <div class="navigation"> \
-      <ul> \
-        <li><a href="#" class="index">All Links</a></li> \
-        <li><a href="#" class="create">Shorten</a></li> \
-      </ul> \
-      </div> \
-      <div> \
-        <input type="text" class="search" placeholder="Search URLs"></input> \
-      </div> \
-      <div id="container"></div>'
-  ),
+  template: Templates['navigation'],
 
   events: {
     "click li a.index":  "renderIndexView",

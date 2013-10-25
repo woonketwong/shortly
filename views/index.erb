@@ -1,5 +1,44 @@
+<script id="navigation" type="text/x-handlebars-template">
+  <div class="navigation">
+    <ul>
+      <li><a href="#" class="index">All Links</a></li>
+      <li><a href="#" class="create">Shorten</a></li>
+    </ul>
+    </div>
+  <div>
+    <input type="text" class="search" placeholder="Search URLs"></input>
+  </div>
+  <div id="container"></div>
+</script>
+
+<script id="sorter" type="text/x-handlebars-template">
+  <div class="sorter">
+    <div class="sort visit">Visit</div>
+    <div class="sort lastVisit">Last Visit</div>
+    <div class="sort">Sort by:</div>
+  </div>
+</script>
+
+<script id="linkView" type="text/x-handlebars-template">
+  <div class="linkView">
+    <img src="/redirect_icon.png"/>
+    <div class="info">
+      <div class="visits"><span class="count">{{visits}}</span>Visits</div>
+      <div class="title">{{title}}</div>
+      <div class="original">{{url}}</div>
+      <a href="{{base_url}}/{{code}}">{{base_url}}/{{code}}</a>
+      <div class="updatedAt">Last visited:{{updated_at}}</div>
+    </div>
+  </div>
+</script>
+
 <script>
   $(function(){
     new Shortly();
+  });
+
+  window.Templates = {};
+  $("[type='text/x-handlebars-template']").each(function(index, div){
+    Templates[div.id] = Handlebars.compile(div.innerHTML);
   });
 </script>

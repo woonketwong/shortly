@@ -1,5 +1,7 @@
 Shortly.LinksView = Backbone.View.extend({
 
+  template: Templates['sorter'],
+
   className: 'links',
 
   initialize: function(){
@@ -9,7 +11,7 @@ Shortly.LinksView = Backbone.View.extend({
 
   render: function() {
     this.$el.empty();
-    this.$el.append('<div class="sort visit">Visit</div><div class="sort lastVisit">Last Visit</div><div class="sort">Sort by:</div>');
+    this.$el.append( this.template() );
     return this;
   },
 
